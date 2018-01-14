@@ -10,7 +10,6 @@ modbus_mapping_t *mb_mapping = NULL; //temporary global
 int async_server_loop(void * args){
     struct modbus_async_t * device = (struct modbus_async_t * )args;
     int i = device->ret_buff;
-    printf("Iterator in async: %d\n", i);
     int s = -1;
     device->ctx = modbus_new_tcp("127.0.0.1", PORT_RANGE_BEGIN+i);
         if (device->ctx == NULL) {
@@ -57,7 +56,6 @@ int main(int argc, char*argv[]){
             devices[i]->ret_buff = i;
             modbus_async_execute_func_int(devices[i], &async_server_loop, devices[i]);
             number_of_running_servers++;
-            fprintf(stdout, "Created device connection %d\n", i);
         }else{
             fprintf(stderr, "Unable to allocate modbus_async in %d iteration\n", i);
             return -1;

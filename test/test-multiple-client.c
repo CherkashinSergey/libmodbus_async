@@ -15,11 +15,8 @@ int async_func (void* args){
     if (num != 5) {// number of read registers is not the one expected
         fprintf(stderr, "Failed to read: %s\n", modbus_strerror(errno));
         return -1;
-    }else{
-        printf("modbus_read_registers executed successfully\n");
-    }
-    int retval = TEST_RET_VALUE;
-    return retval;
+    };
+    return 0;
 }
 
 int main(int argc, char*argv[]){
@@ -53,8 +50,8 @@ int main(int argc, char*argv[]){
 
     for(int i = 0; i < AMOUNT_OF_DEVICES; i++){
         modbus_async_wait_execution(devices[i]);
-        if (modbus_async_get_retval(devices[i]) == TEST_RET_VALUE){
-            printf("Device %d returned correct value\n", i);
+        if (modbus_async_get_retval(devices[i]) == 0){
+            printf("Device %d executed modbus_read_registers succesfully\n", i);
         }else{
             printf("Failed to return correct value from thread.\n");
         }

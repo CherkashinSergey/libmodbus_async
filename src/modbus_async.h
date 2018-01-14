@@ -2,7 +2,7 @@
 #define LIBMODBUS_ASYNC_H
 #include <modbus.h>
 
-#define DEBUG_MODE 1
+#define DEBUG_MODE 0
 #if DEBUG_MODE
 # define DEBUG_MSG(fmt,args...)	printf(fmt, ##args)
 #else
